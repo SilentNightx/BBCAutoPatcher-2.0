@@ -74,8 +74,7 @@ Module Program
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
 
-            'Below are the bash commands that will be executed when running on Linux. Unsure if this works properly. Should add a command to install tes3mp automatically here.
-            Process.Start("/bin/bash", "-c mkdir bbcbackups && tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------")
+            Process.Start("/bin/bash", "-c mkdir ""bbcbackups"" && tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------")
 
         End If
 
