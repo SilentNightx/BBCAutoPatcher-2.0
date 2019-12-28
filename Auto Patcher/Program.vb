@@ -19,7 +19,13 @@ Module Program
         Console.WriteLine("BBCAutoPatcher V2.0 by SilentNightxxx, Greatness7, and *****")
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
 
-        localCfgPath = FileSystem.CurrentDirectory + "\AutoPatcher.cfg"
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
+            localCfgPath = FileSystem.CurrentDirectory + "\AutoPatcher.cfg"
+        End If
+
+        If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
+            localCfgPath = FileSystem.CurrentDirectory + "/AutoPatcher.cfg"
+        End If
 
         If System.IO.File.Exists(localCfgPath) Then
             cfgPath = FileSystem.ReadAllText(localCfgPath)
@@ -73,9 +79,7 @@ Module Program
         End If
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-
-            Process.Start("/bin/bash", "-c mkdir ""bbcbackups"" && tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------")
-
+            Process.Start("/bin/bash", "-c mkdir bbcbackups && tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------")
         End If
 
     End Sub
@@ -122,7 +126,7 @@ Module Program
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
 
             'Below is the path to the Linux openmw.cfg. Unsure if entering it like that will work or if I need to call a SpecialDirectories like function for Linux.
-            cfgPath = "$HOME/.config/openmw/openmw.cfg"
+            cfgPath = "~/.config/openmw/openmw.cfg"
 
             If System.IO.File.Exists(cfgPath) Then
                 Console.WriteLine("OpenMW configuration file detected.")
