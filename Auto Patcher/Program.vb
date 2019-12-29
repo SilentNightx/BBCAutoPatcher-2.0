@@ -16,7 +16,7 @@ Module Program
 
     Sub Main(args As String())
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
-        Console.WriteLine("BBCAutoPatcher V2.0 by SilentNightxxx, Greatness7, and *****")
+        Console.WriteLine("BBCAutoPatcher V2.0 by SilentNightxxx, Greatness7, and johnnyhostile")
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
@@ -125,7 +125,6 @@ Module Program
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
 
-            'Below is the path to the Linux openmw.cfg. Unsure if entering it like that will work or if I need to call a SpecialDirectories like function for Linux.
             cfgPath = "~/.config/openmw/openmw.cfg"
 
             If System.IO.File.Exists(cfgPath) Then
