@@ -9,7 +9,7 @@ Module Program
 
     'Path to openmw.cfg
     Public cfgPath As String
-    'Path to config for this program (AutoPatcher.cfg) which stores the cfgPath.
+    'Path to config for this program (BBCAutoPatcher.cfg) which stores the cfgPath.
     Public localCfgPath As String
     'Answer to Yes/No prompt
     Public answer As String
@@ -20,16 +20,15 @@ Module Program
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
-            localCfgPath = FileSystem.CurrentDirectory + "\AutoPatcher.cfg"
+            localCfgPath = FileSystem.CurrentDirectory + "\BBCAutoPatcher.cfg"
         End If
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            localCfgPath = FileSystem.CurrentDirectory + "/AutoPatcher.cfg"
+            localCfgPath = FileSystem.CurrentDirectory + "/BBCAutoPatcher.cfg"
         End If
 
         If System.IO.File.Exists(localCfgPath) Then
             cfgPath = FileSystem.ReadAllText(localCfgPath)
-            Console.WriteLine(localCfgPath)
         Else
             FirstRun()
         End If
@@ -37,7 +36,7 @@ Module Program
         Console.WriteLine("This will create an auto patch for your current load order and Better Balanced Combat.")
         Console.WriteLine("1. Auto patches are not a replacement for hand crafted patches.")
         Console.WriteLine("2. Make sure to sort your load order before continuing.")
-        Console.WriteLine("3. If the patcher isn't working for you then delete AutoPatcher.cfg and try again.")
+        Console.WriteLine("3. If the patcher isn't working for you then delete BBCAutoPatcher.cfg and try again.")
         If cfgPath <> "No" Then
             Console.WriteLine("4. Be aware that continuing will copy your OpenMW load order to the vanilla game first because the patching program")
             Console.WriteLine("   can't read OpenMW load orders.")
@@ -75,11 +74,11 @@ Module Program
         Console.WriteLine("Generating patch...")
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
-            Process.Start("CMD", "/K MKDIR bbcbackups && tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && RMDIR bbcbackups /s /q && ECHO ------------------------------------------------------------------------------------------------------------------- && ECHO Done! && ECHO Your load order patch was saved as BBC_Auto_Patch.esp. && ECHO Activate and load it after everything else. && ECHO ------------------------------------------------------------------------------------------------------------------- && PAUSE && EXIT")
+            Process.Start("CMD", "/K MKDIR bbcbackups & tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && RMDIR bbcbackups /s /q & ECHO ------------------------------------------------------------------------------------------------------------------- && ECHO Done! && ECHO Your load order patch was saved as BBC_Auto_Patch.esp. && ECHO Activate and load it after everything else. && ECHO ------------------------------------------------------------------------------------------------------------------- && PAUSE && EXIT")
         End If
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            Process.Start("/bin/bash", "-c mkdir bbcbackups && tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------")
+            Process.Start("/bin/bash", "-c ""mkdir bbcbackups || true && ./tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && ./tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups  || true && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------""")
         End If
 
     End Sub
@@ -97,7 +96,7 @@ Module Program
             Else
                 Console.WriteLine("OpenMW configuration file not detected. Do you use OpenMW? (Y/N)")
                 answer = Console.ReadLine()
-                If answer = "Y" Or answer = "y" Or answer = "Yes" Or answer = "yes" Or answer = "YES" Or answer = "YEs" Or answer = "yES" Or answer = "yeS" Then
+                If LCase(answer) = "y" Or LCase(answer) = "yes" Then
                     Console.WriteLine("Enter the path to your openmw.cfg file:")
                     cfgPath = Console.ReadLine()
                     If System.IO.File.Exists(cfgPath) Then
@@ -110,7 +109,7 @@ Module Program
                         Console.ReadKey(True)
                         Environment.Exit(-1)
                     End If
-                ElseIf answer = "N" Or answer = "n" Or answer = "No" Or answer = "NO" Or answer = "no" Or answer = "nO" Then
+                ElseIf LCase(answer) = "n" Or LCase(answer) = "no" Then
                     cfgPath = "No"
                     File.Create(localCfgPath).Dispose()
                     FileSystem.WriteAllText(localCfgPath, cfgPath, True)
@@ -121,11 +120,15 @@ Module Program
                     Environment.Exit(-1)
                 End If
             End If
+
+            Console.WriteLine("Configuration successful.")
+            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
+
         End If
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
 
-            cfgPath = "~/.config/openmw/openmw.cfg"
+            cfgPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/openmw/openmw.cfg"
 
             If System.IO.File.Exists(cfgPath) Then
                 Console.WriteLine("OpenMW configuration file detected.")
@@ -134,7 +137,7 @@ Module Program
             Else
                 Console.WriteLine("OpenMW configuration file not detected. Do you use OpenMW? (Y/N)")
                 answer = Console.ReadLine()
-                If answer = "Y" Or answer = "y" Or answer = "Yes" Or answer = "yes" Or answer = "YES" Or answer = "YEs" Or answer = "yES" Or answer = "yeS" Then
+                If LCase(answer) = "y" Or LCase(answer) = "yes" Then
                     Console.WriteLine("Enter the path to your openmw.cfg file:")
                     cfgPath = Console.ReadLine()
                     If System.IO.File.Exists(cfgPath) Then
@@ -147,7 +150,7 @@ Module Program
                         Console.ReadKey(True)
                         Environment.Exit(-1)
                     End If
-                ElseIf answer = "N" Or answer = "n" Or answer = "No" Or answer = "NO" Or answer = "no" Or answer = "nO" Then
+                ElseIf LCase(answer) = "n" Or LCase(answer) = "no" Then
                     cfgPath = "No"
                     File.Create(localCfgPath).Dispose()
                     FileSystem.WriteAllText(localCfgPath, cfgPath, True)
@@ -158,9 +161,13 @@ Module Program
                     Environment.Exit(-1)
                 End If
             End If
+
+            Process.Start("/bin/bash", "-c ""echo Installing Perl... && curl -L http://xrl.us/installperlnix | bash && echo Setting tes3cmd execute permissions... && chmod 777 tes3cmd && echo Configuration finished, please rerun the program. && echo -------------------------------------------------------------------------------------------------------------------""")
+            Console.ReadKey(True)
+            Environment.Exit(-1)
+
         End If
 
-        Console.WriteLine("Configuration successful.")
-        Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
+
     End Sub
 End Module
