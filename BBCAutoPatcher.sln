@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Auto Patcher", "Auto Patcher\Auto Patcher.vbproj", "{FB42584E-4116-483A-A988-C39118A84D7F}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "BBCAutoPatcher", "Auto Patcher\BBCAutoPatcher.vbproj", "{FB42584E-4116-483A-A988-C39118A84D7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
