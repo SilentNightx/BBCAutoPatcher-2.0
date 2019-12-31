@@ -162,12 +162,23 @@ Module Program
                 End If
             End If
 
-            Process.Start("/bin/bash", "-c ""echo Installing Perl... && curl -L http://xrl.us/installperlnix | bash && echo Setting tes3cmd execute permissions... && chmod 777 tes3cmd && echo Configuration finished, please rerun the program. && echo -------------------------------------------------------------------------------------------------------------------""")
-            Console.ReadKey(True)
-            Environment.Exit(-1)
+            Process.Start("/bin/bash", "-c ""chmod 777 tes3cmd && echo tes3cmd execute permissions set.""")
+
+            If (System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/perl5/perlbrew/bin/perlbrew")) Then
+                Console.WriteLine("Perl detected.")
+                Console.WriteLine("Configuration finished, please rerun the program.")
+                Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
+                Console.ReadKey(True)
+                Environment.Exit(-1)
+            Else
+                Console.WriteLine("No Perl installation detected. This program needs Perl installed to run properly. Continue to install Perl or close")
+                Console.WriteLine("and rerun the program to skip.")
+                Process.Start("/bin/bash", "-c ""read -p ""Press any key to continue..."" $$ echo Installing Perl... && curl -L http://xrl.us/installperlnix | bash && echo Configuration finished, please rerun the program. && echo -------------------------------------------------------------------------------------------------------------------""")
+                Console.ReadKey(True)
+                Environment.Exit(-1)
+            End If
 
         End If
-
 
     End Sub
 End Module
