@@ -173,7 +173,7 @@ Module Program
             Else
                 Console.WriteLine("No Perl installation detected. This program needs Perl installed to run properly. Continue to install Perl or close")
                 Console.WriteLine("and rerun the program to skip.")
-                Process.Start("/bin/bash", "-c ""read -p ""Press any key to continue..."" $$ echo Installing Perl... && curl -L http://xrl.us/installperlnix | bash && echo Configuration finished, please rerun the program. && echo -------------------------------------------------------------------------------------------------------------------""")
+                Process.Start("/bin/bash", "-c ""read -p ""Press any key to continue..."" && echo Installing Perl... && curl -L http://xrl.us/installperlnix | bash && echo Configuration finished, please rerun the program. && echo -------------------------------------------------------------------------------------------------------------------""")
                 Console.ReadKey(True)
                 Environment.Exit(-1)
             End If
