@@ -128,6 +128,8 @@ Module Program
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
 
+            Process.Start("/bin/bash", "-c ""chmod 777 tes3cmd && echo tes3cmd execute permissions set.""")
+
             cfgPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/openmw/openmw.cfg"
 
             If System.IO.File.Exists(cfgPath) Then
@@ -162,8 +164,6 @@ Module Program
                 End If
             End If
 
-            Process.Start("/bin/bash", "-c ""chmod 777 tes3cmd && echo tes3cmd execute permissions set.""")
-
             If (System.IO.File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "/perl5/perlbrew/bin/perlbrew")) Then
                 Console.WriteLine("Perl detected.")
                 Console.WriteLine("Configuration finished, please rerun the program.")
@@ -171,8 +171,9 @@ Module Program
                 Console.ReadKey(True)
                 Environment.Exit(-1)
             Else
-                Console.WriteLine("No Perl installation detected. This program needs Perl installed to run properly. Continue to install Perl or close")
-                Console.WriteLine("and rerun the program to skip.")
+                Console.WriteLine("No Perl installation detected. This program needs Perl installed to run properly. Due to the many flavors of Linux")
+                Console.WriteLine("detection could be wrong. If you believe you already have Perl you may close and rerun the program to skip this")
+                Console.WriteLine("step, otherwise continue to install Perl.")
                 Process.Start("/bin/bash", "-c ""read -p ""Press any key to continue..."" && echo Installing Perl... && curl -L http://xrl.us/installperlnix | bash && echo Configuration finished, please rerun the program. && echo -------------------------------------------------------------------------------------------------------------------""")
                 Console.ReadKey(True)
                 Environment.Exit(-1)
