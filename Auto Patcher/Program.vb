@@ -162,20 +162,20 @@ Module Program
         End If
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Linux) Then
-            If System.IO.File.Exists(FileSystem.CurrentDirectory + "/BBCAutoPatcher.pl") And System.IO.File.Exists(FileSystem.CurrentDirectory + "/tes3cmd.exe") Then
+            If System.IO.File.Exists(FileSystem.CurrentDirectory + "/BBCAutoPatcher.pl") And System.IO.File.Exists(FileSystem.CurrentDirectory + "/tes3cmd") Then
                 Process.Start("/bin/bash", "-c ""mkdir bbcbackups || true && ./tes3cmd modify -backup-dir bbcbackups -hide-backups -program BBCAutoPatcher.pl && ./tes3cmd header -backup-dir bbcbackups -hide-backups -synchronize BBC_Auto_Patch.esp && rm -rf bbcbackups  || true && echo ------------------------------------------------------------------------------------------------------------------- && echo Done! && echo Your load order patch was saved as BBC_Auto_Patch.esp. && echo Activate and load it after everything else. && echo -------------------------------------------------------------------------------------------------------------------""")
             ElseIf System.IO.File.Exists(FileSystem.CurrentDirectory + "/BBCAutoPatcher.pl") Then
                 Console.WriteLine("Error, missing tes3cmd.exe in your Data Files directory.")
                 Console.WriteLine("Press any key to continue...")
                 Console.ReadKey(True)
                 Environment.Exit(-1)
-            ElseIf System.IO.File.Exists(FileSystem.CurrentDirectory + "/tes3cmd.exe") Then
+            ElseIf System.IO.File.Exists(FileSystem.CurrentDirectory + "/tes3cmd") Then
                 Console.WriteLine("Error, missing BBCAutoPatcher.pl in your Data Files directory.")
                 Console.WriteLine("Press any key to continue...")
                 Console.ReadKey(True)
                 Environment.Exit(-1)
             Else
-                Console.WriteLine("Error, missing tes3cmd.exe and BBCAutoPatcher.pl in your Data Files directory.")
+                Console.WriteLine("Error, missing tes3cmd and BBCAutoPatcher.pl in your Data Files directory.")
                 Console.WriteLine("Press any key to continue...")
                 Console.ReadKey(True)
                 Environment.Exit(-1)
