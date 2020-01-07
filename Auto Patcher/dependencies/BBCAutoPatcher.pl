@@ -10,7 +10,7 @@ my $recordcounter = 0;
 
 for my $plugin (reverse $T3->load_order) {
 	# exclude self
-    next if $plugin eq 'BBC_Auto_Patch.esp';
+    	next if $plugin eq 'BBC_Auto_Patch.esp';
 
 	# exclude base game
 	next if $plugin eq 'Morrowind.esm';
@@ -36,6 +36,7 @@ for my $plugin (reverse $T3->load_order) {
 
 	# exclude mods with patches
 	next if $plugin eq 'Siege at Firemoth.esp';
+	next if $plugin eq 'Unofficial Morrowind Official Plugins Patched.ESP';
 	next if $plugin eq 'Tamriel_Data.esm';
 	next if $plugin eq 'TR_Mainland.esm';
 	next if $plugin eq 'TR_Preview.esp';
