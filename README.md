@@ -13,10 +13,10 @@ dotnet publish -r linux-x64
 
 dotnet publish -r linux-arm
 
-# Using
+# Install
 Place executable in Data Files folder
 
-Place BBCAutoPatcher.pl in Data Files folder
+Place BBCAutoPatcher.pl from dependencies in Data Files folder
 
 Windows: Place tes3cmd.exe from dependencies in Data Files folder
 
