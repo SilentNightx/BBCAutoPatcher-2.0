@@ -13,11 +13,16 @@ Module Program
     Public iniPath As String
     'Path to config for this program (BBCAutoPatcher.cfg) which stores the cfgPath.
     Public localCfgPath As String
+    'Stores name of executable
+    Public fileTitle As String
 
     Sub Main(args As String())
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
         Console.WriteLine("BBCAutoPatcher V2.0 by SilentNightxxx, Greatness7, and johnnyhostile")
         Console.WriteLine("-------------------------------------------------------------------------------------------------------------------")
+
+        fileTitle = Process.GetCurrentProcess().MainModule.ModuleName
+        Directory.SetCurrentDirectory(Process.GetCurrentProcess().MainModule.FileName.Replace(fileTitle, ""))
 
         If RuntimeInformation.IsOSPlatform(OSPlatform.Windows) Then
             localCfgPath = FileSystem.CurrentDirectory + "\BBCAutoPatcher.cfg"
