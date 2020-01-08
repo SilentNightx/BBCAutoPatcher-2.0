@@ -1,6 +1,6 @@
 my $output = open_for_output('BBC_Auto_Patch.esp');
 print $output make_header({
-    author => 'SilentNightxxx, Greatness7, and johnnyhostile',
+    author => 'SilentNightxxx, Greatness7, etc',
     description => 'Better Balanced Combat Auto Patch',
 });
 
